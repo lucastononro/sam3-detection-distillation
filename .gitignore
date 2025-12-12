@@ -8,6 +8,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.egg-info/
+dist/
+build/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -16,9 +18,25 @@ __pycache__/
 outputs/
 images/
 
+# Projects directory (scraped images, datasets, models)
+projects/
+
+# Model weights
+*.pt
+*.pth
+*.onnx
+
 # IDE
 .vscode/
 .idea/
 
 # OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+wandb/
+
+# Temporary files
+_temp/

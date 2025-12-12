@@ -1,10 +1,39 @@
+# SAM3 Detection Distillation Framework
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+pillow>=9.0.0
+
+# SAM3 model (requires transformers from git for latest SAM3 support)
 git+https://github.com/huggingface/transformers.git
-torch
-torchvision
-huggingface_hub
-python-dotenv
-pillow
-numpy
-matplotlib
-requests
-streamlit
+huggingface_hub>=0.20.0
+
+# Image scraping
+bing-image-downloader>=1.1.2
+
+# Object detection training
+ultralytics>=8.0.0
+
+# Dataset formats
+pyyaml>=6.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# Experiment tracking (optional)
+wandb>=0.15.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Visualization (optional, for notebooks)
+matplotlib>=3.7.0
+
+# Web app (optional)
+streamlit>=1.28.0
+
+# HTTP requests
+requests>=2.28.0
