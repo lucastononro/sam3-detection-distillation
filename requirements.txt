@@ -1,0 +1,10 @@
+git+https://github.com/huggingface/transformers.git
+torch
+torchvision
+huggingface_hub
+python-dotenv
+pillow
+numpy
+matplotlib
+requests
+streamlit
