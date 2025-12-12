@@ -1,0 +1,101 @@
+# SAM3 Detection Distillation - PPE Detection Example
+#
+# This configuration demonstrates detecting Personal Protective Equipment (PPE)
+# for workplace safety compliance applications.
+#
+# Usage:
+#   python scripts/run.py --config configs/example_ppe.yaml
+
+project:
+  name: ppe_detection
+  output_dir: ./projects/ppe_detection
+
+# Classes to detect
+# - search_queries: Used for scraping diverse images from Bing
+# - prompt: Simple 1-2 word prompt for SAM3 text-based detection
+classes:
+  hard_hat:
+    search_queries:
+      - "construction worker hard hat"
+      - "safety helmet construction site"
+      - "worker wearing yellow hard hat"
+      - "industrial hard hat worker"
+      - "construction site safety helmet"
+    prompt: "hard hat"
+
+  safety_vest:
+    search_queries:
+      - "high visibility safety vest worker"
+      - "construction worker reflective vest"
+      - "hi-vis jacket construction site"
+      - "fluorescent safety vest"
+      - "road worker safety vest"
+    prompt: "safety vest"
+
+  safety_goggles:
+    search_queries:
+      - "safety goggles worker"
+      - "protective eyewear industrial"
+      - "construction safety glasses"
+      - "lab safety goggles"
+      - "welding safety goggles"
+    prompt: "goggles"
+
+  gloves:
+    search_queries:
+      - "work gloves construction"
+      - "safety gloves industrial worker"
+      - "protective gloves PPE"
+      - "leather work gloves"
+      - "rubber safety gloves"
+    prompt: "gloves"
+
+  face_mask:
+    search_queries:
+      - "N95 mask worker"
+      - "dust mask construction"
+      - "respirator mask industrial"
+      - "protective face mask worker"
+      - "safety mask PPE"
+    prompt: "mask"
+
+# Image scraping settings
+scraping:
+  images_per_class: 1000  # Target images per class
+  timeout: 60             # Timeout per download in seconds
+
+# SAM3 labeling settings
+labeling:
+  threshold: 0.5              # Confidence threshold for detections
+  max_detections_per_image: 10  # Max objects per class per image
+  device: auto                # auto, cuda, mps, cpu
+
+# Dataset creation settings
+dataset:
+  split: [0.7, 0.2, 0.1]  # train, val, test ratios
+  formats:
+    - yolo
+    - coco
+
+# Model training settings
+training:
+  yolo:
+    enabled: true
+    model: yolov8m        # Options: yolov8n, yolov8s, yolov8m, yolov8l, yolov8x
+    epochs: 100
+    batch_size: 16
+    imgsz: 640
+
+  rtdetr:
+    enabled: true
+    model: rtdetr-l       # Options: rtdetr-l, rtdetr-x
+    epochs: 100
+    batch_size: 8
+    imgsz: 640
+
+# Logging settings
+logging:
+  wandb:
+    enabled: false        # Set to true to enable W&B logging
+    project: sam3-ppe-detection
+    # entity: your-wandb-username  # Optional: your W&B username/team
